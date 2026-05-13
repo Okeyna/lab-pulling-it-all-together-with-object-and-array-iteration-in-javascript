@@ -114,3 +114,97 @@ function gameObject() {
         },
     };
 }
+
+const numPointsScored = (playerName) => {
+    const game = gameObject();
+    for (const team in game) {
+        const players = game[team].players;
+        if (playerName in players) {
+            return players[playerName].points;
+        }
+    }
+    return null; // Return null if player not found
+};
+
+const shoeSize = (playerName) => {
+    const game = gameObject();
+    for (const team in game) {
+        const players = game[team].players;
+        if (playerName in players) {
+            return players[playerName].shoe;
+        }
+    }
+    return null; // Return null if player not found
+};
+
+const teamColors = (teamName) => {
+    const game = gameObject();
+    const colors = [];
+    for (const team in game) {
+        if (game[team].teamName === teamName) {
+            colors.push(...game[team].colors);
+        }
+    }
+    return colors; // Return null if team not found
+}
+
+const teamNames = () => {
+    const game = gameObject();
+    const names = [];
+    for (const team in game) {
+        names.push(game[team].teamName);
+    }
+    return names;
+}
+
+const playerNumbers = (teamName) => {
+    const game = gameObject();
+    const numbers = [];
+    for (const team in game) {
+        if (game[team].teamName === teamName) {
+            const players = game[team].players;
+            for (const player in players) {
+                numbers.push(players[player].number);
+            }
+        }
+    }
+    return numbers; // Return null if team not found
+}
+
+const playerStats = (playerName) => {
+    const game = gameObject();
+    for (const team in game) {
+        const players = game[team].players;
+        if (playerName in players) {
+            return players[playerName];
+        }
+    }
+    return null; // Return null if player not found
+}
+
+const bigShoeRebounds = () => {
+    const game = gameObject();
+    let biggestShoe = 0;
+    let rebounds = 0;
+    for (const team in game) {
+        const players = game[team].players;
+        for (const player in players) {
+            if (players[player].shoe > biggestShoe) {
+                biggestShoe = players[player].shoe;
+                rebounds = players[player].rebounds;
+            }
+        }
+    }
+    return rebounds;
+}
+
+module.exports = {
+    gameObject,
+    numPointsScored,
+    shoeSize,
+    teamColors,
+    teamNames,
+    playerNumbers,
+    playerStats,
+    bigShoeRebounds
+};
